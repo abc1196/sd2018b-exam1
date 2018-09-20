@@ -1,0 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos1706_v0.2.0"
+  config.vm.network "public_network", bridge: "eno1", ip:"192.168.180.10", netmask: "255.255.255.0"
+  config.vm.provision :chef_solo do |chef|
+    chef.install = false
+    chef.cookbooks_path = "cookbooks"
+    chef.add_recipe "dhcpd"
+  end  
+end
