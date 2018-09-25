@@ -1,0 +1,10 @@
+{
+	packages:
+	[
+		"epel-release",
+		"python36u",
+		"python36u-pip",
+		"wget",
+		"unzip"
+	]			
+}
