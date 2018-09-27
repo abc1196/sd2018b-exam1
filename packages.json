@@ -1,5 +1,5 @@
 {
-	packages:
+	"packages":
 	[
 		"epel-release",
 		"python36u",
