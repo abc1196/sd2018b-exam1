@@ -1,28 +1,26 @@
 from flask import Flask, request, json
-from github import Github
+from fabric import Connection
 import subprocess
 import requests
 
-g=Github("f1a51c65e60ec352849963361f34c59030d9873b")
 app = Flask(__name__)
 
 @app.route('/abc/exam1/api/v1/packages', methods=['POST'])
 def set_packages():
+    comm=Connection(host="root@192.168.180.40",connect_kwargs={"password":"vagrant"})
     content=request.get_data()
     string=str(content, 'utf-8')
     jsonFile=json.loads(string)
-    r=requests.get('https://api.github.com/repos/abc1196/sd2018b-exam1/pulls/2/files', auth=('token', 'f1a51c65e60ec352849963361f34c59030d9873b'))
-    print("HOLA")
-    print(r.text)
-    file=open("/vagrant/pull.txt", "w")
-    file.write(r.text)
-    file.close()
-    print(r)
-    print(g.get_user().get_repo("sd2018b-exam1").get_pull(jsonFile["number"]))
-    print(jsonFile["number"])
-    print("ADIOS")
-    return "danke"
+    sha=jsonFile["pull_request"]["head"]["sha"]
+    packagesUrl="https://raw.githubusercontent.com/abc1196/sd2018b-exam1/"+sha+"/packages.json"
+    packagesResponse=requests.get(packagesUrl)
+    packages=json.loads(packagesResponse.content)
+    packagesString=' '.join(packages["packages"])
+    updateMirror="yum install --downloadonly --downloaddir=/var/repo "+packagesString
+    comm.run(updateMirror)
+    return packages
 
 
 if __name__ == '__main__':
    app.run(debug=True)
+

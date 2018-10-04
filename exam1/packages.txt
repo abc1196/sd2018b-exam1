@@ -1,1 +1,1 @@
-epel-release python36u python36u-pip wget unzip
+epel-release python36u python36u-pip wget unzip nmap
