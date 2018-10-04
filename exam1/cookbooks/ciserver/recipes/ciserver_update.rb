@@ -13,6 +13,7 @@ bash 'ciserver_update' do
   source exam1/bin/activate
   pip3.6 install flask
   pip3.6 install fabric
+  pip3.6 install requests
   cp /tmp/exam1.py exam1.py
   deactivate
   EOH

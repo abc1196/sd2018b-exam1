@@ -2,6 +2,7 @@ bash 'mirrorserver_install' do
   user 'root'
   code <<-EOH
   yum install -y createrepo
+  yum install --downloadonly --downloaddir=/var/repo wget
   yum install -y wget
   yum install -y yum-plugin-downloadonly
   yum install -y https://centos7.iuscommunity.org/ius-release.rpm
