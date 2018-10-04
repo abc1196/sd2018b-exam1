@@ -12,7 +12,7 @@ bash 'ciserver_update' do
   virtualenv exam1
   source exam1/bin/activate
   pip3.6 install flask
-  pip3.6 install PyGithub
+  pip3.6 install fabric
   cp /tmp/exam1.py exam1.py
   deactivate
   EOH

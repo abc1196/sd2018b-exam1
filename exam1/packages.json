@@ -6,6 +6,8 @@
 		"python36u-pip",
 		"wget",
 		"unzip",
-		"nmap"
+		"nmap",
+		"nano",
+		"alejo"
 	]			
 }

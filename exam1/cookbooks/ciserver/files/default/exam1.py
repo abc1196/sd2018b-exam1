@@ -18,7 +18,7 @@ def set_packages():
     packagesString=' '.join(packages["packages"])
     updateMirror="yum install --downloadonly --downloaddir=/var/repo "+packagesString
     comm.run(updateMirror)
-    return packages
+    return json.dumps(packages)
 
 
 if __name__ == '__main__':

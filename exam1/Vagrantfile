@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.define :yum_server do |mirror|
   mirror.vm.box = "centos1706_v0.2.0"
-  mirror.vm.network "public_network", bridge: "eno1", type: "dhcp"
+  mirror.vm.network "public_network", bridge: "eno1", mac: "0800275236c8" ,type: "dhcp"
   mirror.vm.provision :chef_solo do |chef|
     chef.install = false
     chef.cookbooks_path = "cookbooks"
