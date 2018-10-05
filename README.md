@@ -35,6 +35,40 @@ The desired infrastructure to deploy consists in four virtual machines (VM) with
 ![][1]
 **Figure 1**. Deploy Diagram  
 
+### Provisioning  
+The exam1 directory contains two key elements to deploy the infrastructure. The first one is the Vagrantfile. This file contains the provisioning required for each VM. The provisioning is implemented by the Chef recipes located in the cookbooks directory. 
+
+#### dhcpd  
+Cookbook that provisions the DHCP Server. Contains three recipes:
+ *  dhcpd_install: installs the dhcp packages into the VM  
+ *  dhcpd_copy_files: copies the dhcpd.conf file into the VM.
+ *  dhcpd_config: starts the DHCPD service.  
+ 
+ #### httpd
+ Cookbook that provisions an httpd service. It's used in the YUM Mirror Server. Contains two recipes:
+ *  httpd_install: installs the httpd packages into the VM.
+ *  httpd_config: starts the httpd service.  
+ 
+#### mirrorserver
+Cookbook that provisions the YUM Mirror Server. Contains four recipes:
+ *  mirrorserver_ssh: copies the sshd_config file to allow an SSH connection between the YUM Mirror Server and the CI Server. 
+ *  mirrorserver_install: installs the required packages to host a Mirror Server and downloads the packages.json file located in Github.
+ *  mirrorserver_python: a python script that reads the content in the packages.json and converts it in a string with the packages.
+ *  mirrorserver_downloaddir: takes the string created in the python script and installs the dependencies in the YUM Mirror Server.
+ 
+#### ciserver
+Cookbook that provisions the CI Server. Contains three recipes:
+ *  ciserver_copy_files: copies the application file (Python) in the VM.  
+ *  ciserver_update: installs the required libraries to run a Flask application. Creates the virtual enviroment with the application ready to deploy.  
+ *  ciserver_ngrok: downloads the ngrok library to create a public address to connect the endpoint with the Github Webhook.  
+ 
+#### mirrorclient  
+Cookbook that provisions the YUM Client. Contains four recipes:
+ *  mirror_hosts: copies the hosts file in the VM that contain the YUM Mirror Server's IP address.    
+ *  mirror_delete_repos: deletes the existing repositories to create a new one from the YUM Mirror Server
+ *  mirror_repo: copies the icesi.repo file associated to the YUM Mirror Server. 
+ *  mirror_yum: gets the repolist from the YUM Mirror Server.   
+
 ### Deployment  
 After you clone the repository, execute the following commands:  
 
