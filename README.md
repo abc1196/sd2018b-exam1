@@ -87,7 +87,7 @@ With all the above steps, you should have the infrastructure provisioned and run
 **Figure 3** DCHP Server running dhcpd service  
 
 ![][4]  
-**Figure 4** YUM Mirror Server running with its dependencies  
+**Figure 4** YUM Mirror Server running with its dependencies. Below, the YUM Client with the YUM Mirror Server as a repository  
 
 ![][5]  
 **Figure 5** Github Webhook  
@@ -123,7 +123,7 @@ Commit changes and check the CI Server status. The Flask/Ngrok will return a HTT
  yum repolist
  yum install -y nmap
  ```
- With the commands above, the YUM Client will update its Mirror Server repository. 
+ With the commands above, the YUM Client will update its Mirror Server repository and install the new package.
  
  ![][7]  
  **Figure 7** YUM Mirror Server with the repository updated  
