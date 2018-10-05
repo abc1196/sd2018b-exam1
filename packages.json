@@ -6,9 +6,6 @@
 		"python36u-pip",
 		"wget",
 		"unzip",
-		"nano",
-		"bind",
-		"nmap",
-		"tree"
+		"nano"
 	]			
 }
