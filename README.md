@@ -93,8 +93,43 @@ With all the above steps, you should have the infrastructure provisioned and run
 **Figure 5** Github Webhook  
 
 ### Demonstration
-TODO
+Go to the packages.json file and add a dependency to it. For this example, the library **nmap** was added. The file will be like this:
+```
+{
+	"packages":
+	[
+		"epel-release",
+		"python36u",
+		"python36u-pip",
+		"wget",
+		"unzip",
+		"nano",
+		"nmap"
+	]			
+}
+```
+Commit changes and check the CI Server status. The Flask/Ngrok will return a HTTP Response 200 (OK) if the packages were installed succesfully.
 
+![][6]  
+**Figure 6** CI Server Response OK
+
+ Go to the YUM Mirror Server and run the following command:
+ ```
+ ls /var/repo
+ ```
+ The dependency **nmap** must be in the directory. Then, go to the YUM Client and execute these commandas:
+ ```
+ yum clean all
+ yum repolist
+ yum install -y nmap
+ ```
+ With the commands above, the YUM Client will update its Mirror Server repository. 
+ 
+ ![][7]  
+ **Figure 7** YUM Mirror Server with the repository updated  
+ 
+ ![][8] ![][9]  
+ **Figure 8** YUM Client with the updated repository
 ### Issues  
 During the exam, three minor issues were found. First, if the provisioning was executed with just *vagrant up*, sometimes, the VM's that were configured with DHCP, would not have an IP addres because the DHCP Server wasn't provisioned yet. To fix this, the DHCP Server was provisioned first. Then, a *vagrant up* would provision the rest of the VM's. Second, without a static IP for the Mirror YUM Server, it was necessary to edit the /etc/hosts file for the YUM Clients each time the Server was created. A MAC address was assigned to the YUM Server and that host was created in the DHCP Server to assign it a static IP address. Third, it was difficult to know how to obtain the packages.json of the Pull request. Discussing with the professor and other students, it was possible to find the location of the packages.json file by a SHA value created in the Pull request body.
 
@@ -111,3 +146,7 @@ During the exam, three minor issues were found. First, if the provisioning was e
 [3]: images/03_dhcp_server_setup.PNG  
 [4]: images/04_yum_server_setup.PNG	
 [5]: images/05_webhook_setup.PNG
+[6]: images/06_ci_server_demo.PNG	
+[7]: images/07_yum_server_demo.PNG  
+[8]: images/08_yum_client_demo.PNG	
+[9]: images/09_yum_client_demo_2.PNG  
