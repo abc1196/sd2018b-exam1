@@ -17,7 +17,9 @@ def set_packages():
     packages=json.loads(packagesResponse.content)
     packagesString=' '.join(packages["packages"])
     updateMirror="yum install --downloadonly --downloaddir=/var/repo "+packagesString
+    comm.run("cd /var/repo")
     comm.run(updateMirror)
+    comm.run("createrepo --update /var/repo/")
     return json.dumps(packages)
 
 
