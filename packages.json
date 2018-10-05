@@ -7,6 +7,6 @@
 		"wget",
 		"unzip",
 		"nano",
-		"nmap"
+		"bind"
 	]			
 }
