@@ -1,6 +1,6 @@
 # sd2018b Exam 1
 **Icesi University**  
-**Course:** Distributed Systems 
+**Course:** Distributed Systems   
 **Professor:** Daniel Barragán C.  
 **Subject:** Infrastructure automation  
 **Email:** daniel.barragan at correo.icesi.edu.co  
@@ -8,7 +8,7 @@
 **Student ID:** A00335472  
 **Git URL:** https://github.com/abc1196/sd2018b-exam1.git  
 
-### Goals to achieve
+### Expected results
 * Develop the automatic provisioning of an infrastructure
 * Diagnose and execute the needed actions to achieve a stable infrastructure  
 
@@ -76,7 +76,21 @@ Finally, let's create the Github webhook. In the repository, go to *Settings -> 
 ```
 http://XXXXXXXX.ngrok.io/abc/exam1/api/v1/packages
 ```
-Where XXXXXXXX is the URL ngrok provides each time we run the ngrok command.
+Where XXXXXXXX is the URL ngrok provides each time we run the ngrok command. Last, check the *Let me select individual events* and check *Pull requests*.  
+
+With all the above steps, you should have the infrastructure provisioned and running. The VM's will look like this:
+
+![][2]  
+**Figure 2** CI Server running with Flask/Ngrok  
+
+![][3]  
+**Figure 3** DCHP Server running dhcpd service  
+
+![][4]  
+**Figure 4** YUM Mirror Server running with its dependencies  
+
+![][5]  
+**Figure 5** Github Webhook
 
 
 ### References  
@@ -87,4 +101,8 @@ Where XXXXXXXX is the URL ngrok provides each time we run the ngrok command.
 * http://flask.pocoo.org/  
 * https://connexion.readthedocs.io/en/latest/  
 
-[1]: images/01_deploy_diagrampng.png
+[1]: images/01_deploy_diagrampng.png  
+[2]: images/02_ci_server_setup.PNG  
+[3]: images/03_dhcp_server_setup.PNG  
+[4]: images/04_yum_server_setup.PNG	
+[5]: images/05_webhook_setup.PNG
