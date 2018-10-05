@@ -90,8 +90,10 @@ With all the above steps, you should have the infrastructure provisioned and run
 **Figure 4** YUM Mirror Server running with its dependencies  
 
 ![][5]  
-**Figure 5** Github Webhook
+**Figure 5** Github Webhook  
 
+### Demonstration
+TODO
 
 ### Issues  
 During the exam, three minor issues were found. First, if the provisioning was executed with just *vagrant up*, sometimes, the VM's that were configured with DHCP, would not have an IP addres because the DHCP Server wasn't provisioned yet. To fix this, the DHCP Server was provisioned first. Then, a *vagrant up* would provision the rest of the VM's. Second, without a static IP for the Mirror YUM Server, it was necessary to edit the /etc/hosts file for the YUM Clients each time the Server was created. A MAC address was assigned to the YUM Server and that host was created in the DHCP Server to assign it a static IP address. Third, it was difficult to know how to obtain the packages.json of the Pull request. Discussing with the professor and other students, it was possible to find the location of the packages.json file by a SHA value created in the Pull request body.
